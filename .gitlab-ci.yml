@@ -1,0 +1,11 @@
+stages:
+	- deploy
+
+deploy:
+	stage: deploy
+	script:
+		- echo "Deploying to Yandex Cloud..."
+		- apt-get update && apt-get install -y rsync
+		- rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" ./ user2@158.160.12.132:/var/www/html/
+	only:
+		- main
